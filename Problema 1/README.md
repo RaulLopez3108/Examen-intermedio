@@ -1,0 +1,1 @@
+![Texto alternativo](gap_vinos.png)
