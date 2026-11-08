@@ -1,9 +1,3 @@
-
-
-
-
-
-
 ## Graficas
 
 ### Gráfica del Inciso (a)
@@ -45,3 +39,15 @@ Se procesaron las 13 características químicas estandarizadas del dataset real 
 * **Número óptimo de grupos ($k^*$):** El método detectó de forma autónoma que el número óptimo de clústeres es **$k^* = 3$**, 
 
 
+## Inciso (D): Comparacion
+* **Matriz de Contingencia (Grupos Detectados vs Clases Reales):** 
+  El agrupamiento no supervisado logró reconstruir con altísima pureza las clases biológicas originales sin haber visto jamás las etiquetas durante el proceso:
+  
+
+```text
+--- MATRIZ DE CONTINGENCIA ---
+Clase Real UCI     1    2    3
+Grupo Detectado
+1                 59    3    0
+2                  0    3   48
+3                  0   65    0
