@@ -16,8 +16,8 @@ Examen intermedio/
 cd "C:\Users\Usuario\Desktop\Examen intermedio\Problema 1"
 
 ###### Crear y activar el entorno virtual con uv
-uv venv
- \.venv\Scripts\Activate.ps1
+    uv venv
+     \.venv\Scripts\Activate.ps1
 ###### Instalar dependencias científicas para clustering y reducción de dimensionalidad
 uv pip install numpy pandas scikit-learn scipy matplotlib seaborn
 uv codigo.py
@@ -30,6 +30,6 @@ uv codigo.py
     uv venv
      \.venv\Scripts\Activate.ps1
 ###### Instalar las librerías requeridas para el análisis, modelos y gráficas
- uv pip install numpy pandas scikit-learn xgboost matplotlib requests
- uv run codigo.py
+     uv pip install numpy pandas scikit-learn xgboost matplotlib requests
+     uv run codigo.py
  
