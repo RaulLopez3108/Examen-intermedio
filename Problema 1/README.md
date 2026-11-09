@@ -1,14 +1,4 @@
 ## Graficas
-
-### Gráfica del Inciso (a)
-![Curva de Detección Gap Statistic](curva_deteccion_gap_alg1.png)
-esta curva dice qué tan separados tienen que estar los grupos para que el criterio los encuentre.
-
-
-# Problema 1: Agrupamiento, Gap Statistic y t-SNE
-
-Este repositorio contiene la solución completa para el Problema 1 del examen intermedio, estructurado con la implementación en Python, el análisis metodológico y las visualizaciones correspondientes.
-
 ---
 
 ## Inciso (A): Criterio de la Gap Statistic y Curva de Detección
@@ -37,7 +27,7 @@ Se aplicó t-SNE sobre un conjunto de datos sintéticos proveniente de **una sol
 Se procesaron las 13 características químicas estandarizadas del dataset real de vinos de la UCI (`wine.data`) aplicando el criterio de la *Gap Statistic* y K-Means.
 
 * **Número óptimo de grupos ($k^*$):** El método detectó de forma autónoma que el número óptimo de clústeres es **$k^* = 3$**, 
-
+![La trampa visual t-SNE](gap_vinos.png)
 
 ## Inciso (D): Comparacion
 * **Matriz de Contingencia (Grupos Detectados vs Clases Reales):** 
