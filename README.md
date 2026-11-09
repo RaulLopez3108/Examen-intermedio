@@ -12,24 +12,24 @@ Examen intermedio/
 </pre>
 
     
-## Pasos para ejecutar el problema 1
+##### Pasos para ejecutar el problema 1
 cd "C:\Users\Usuario\Desktop\Examen intermedio\Problema 1"
 
-# Crear y activar el entorno virtual con uv
+###### Crear y activar el entorno virtual con uv
 uv venv
-# .\.venv\Scripts\Activate.ps1
-# Instalar dependencias científicas para clustering y reducción de dimensionalidad
+ \.venv\Scripts\Activate.ps1
+###### Instalar dependencias científicas para clustering y reducción de dimensionalidad
 uv pip install numpy pandas scikit-learn scipy matplotlib seaborn
 uv codigo.py
 
 
 
-## Pasos para ejecutar el problema 2
- +cd "C:\Users\Usuario\Desktop\Examen intermedio\Problema 2"
-### Inicializar entorno con uv 
-uv venv
-# .\.venv\Scripts\Activate.ps1
-### Instalar las librerías requeridas para el análisis, modelos y gráficas
+##### Pasos para ejecutar el problema 2
+ cd "C:\Users\Usuario\Desktop\Examen intermedio\Problema 2"
+###### Inicializar entorno con uv 
+    uv venv
+     \.venv\Scripts\Activate.ps1
+###### Instalar las librerías requeridas para el análisis, modelos y gráficas
  uv pip install numpy pandas scikit-learn xgboost matplotlib requests
  uv run codigo.py
  
