@@ -4,8 +4,6 @@ import numpy as np
 import pandas as pd
 from sklearn.cluster import KMeans
 from sklearn.manifold import TSNE
-
-# Importamos tu función existente para cargar y limpiar los datos de los vinos
 from cargar_dataset import descargar_y_limpiar_vinos
 
 print("=== INICIO DE LA RESOLUCIÓN COMPLETA (INCISOS A, B y C) ===")
@@ -18,8 +16,8 @@ print("\n--- EJECUTANDO INCISO (A): Gap Statistic ---")
 
 a = 2
 b = 6  # Parámetro personal
-d = 2 + (b % 3)  # Dimensión d = 3
-n = 200 + 50 * b  # Número de datos n = 250
+d = 2 + (b % 3)  
+n = 200 + 50 * b  
 k_max_a = 2
 B_a = 50
 
@@ -82,7 +80,7 @@ def criterio_gap_statistic(X, k_max=2, B=50):
   return k_star > 1
 
 
-num_simulaciones = 1  # Ajustable para pruebas rápidas (puedes subir a 100)
+num_simulaciones = 100  
 
 # Simulación de Falsas Alarmas (Estándar)
 fa_estandar = 0
@@ -171,10 +169,9 @@ print(" -> Gráfica del Inciso (B) guardada.")
 # ==========================================
 print("\n--- EJECUTANDO INCISO (C): Datos Reales de Vinos ---")
 
-# Cargamos usando tu función previa
+
 X_scaled, y_real = descargar_y_limpiar_vinos()
 
-# Localizamos el archivo original para extraer nombres y medias sin escalar
 data_file = "dataset/wine_data/wine.data"
 if not os.path.exists(data_file):
   for root, dirs, files in os.walk("dataset/wine_data"):
@@ -200,7 +197,7 @@ columnas = [
 df_original = pd.read_csv(data_file, header=None, names=columnas)
 X_raw = df_original.drop(columns=["Clase"])
 
-# Aplicación de Gap Statistic para k_max = 5 en datos de vinos
+
 k_max_c = 5
 B_c = 50
 n_samples_c, d_dim_c = X_scaled.shape
@@ -262,7 +259,7 @@ for k in range(1, k_max_c):
 
 print(f"\n >>> ¡NÚMERO ÓPTIMO DE GRUPOS DETECTADO (k*): {k_star_c} <<< \n")
 
-# Agrupamiento final y descripción con variables originales
+
 kmeans_final = KMeans(n_clusters=k_star_c, n_init=20, random_state=218207462).fit(
     X_scaled
 )
