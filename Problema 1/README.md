@@ -41,3 +41,13 @@ Grupo Detectado
 1                 59    3    0
 2                  0    3   48
 3                  0   65    0
+```
+## Desiciones
+
+### Datos sin grupos 
+Datos sin grupo son una nube de datos ficticios, uniformes y sin agrupaciones pero con el mismo tamaño y forma que los datos originales para medir si las reducciones de error que ves con k-medias son un descubrimiento real o una simple ilusión matemática del algoritmo.
+
+#### Preprocesamiento 
+en el preprocesamiento de los datos primero rellenamos los datos faltantes (si es que hay) con la mediana y después se aplico una estandarización a los datos
+
+
