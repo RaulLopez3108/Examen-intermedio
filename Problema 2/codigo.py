@@ -32,28 +32,18 @@ df.columns = df.columns.str.strip()
 # Convertir la columna de fecha
 df['Date'] = pd.to_datetime(df['Date'], format='%d/%m/%Y')
 
-# Tratamiento de Functioning Day:
-# Las horas donde el sistema no funcionó (Functioning Day == 'No') implican que Rented Bike Count es 0.
-# Decisión: Las removemos del entrenamiento porque el sistema está inactivo y no aporta aprendizaje útil
-# sobre la demanda real de usuarios, pero se pueden evaluar o aislar según el criterio.
-# Aquí filtramos el entrenamiento/prueba principal removiendo esas horas o manejándolas.
+
 print(f"Filas totales antes de filtrar Functioning Day == 'No': {len(df)}")
 df = df[df['Functioning Day'] == 'Yes'].copy()
 
 # Extracción de atributos temporales útiles
-df['Hour'] = df['Date'].dt.hour # O extraer de la columna 'Hour' si viene separada
-# Nota: En el dataset de Seúl Bike, la hora viene en una columna llamada 'Hour' (0-23) y la fecha en 'Date'.
-# Asegurémonos de parsear correctamente según las columnas reales:
-# ['Date', 'Rented Bike Count', 'Hour', 'Temperature(°C)', 'Humidity(%)', 'Wind speed (m/s)', 
-#  'Visibility (10m)', 'Dew point temperature(°C)', 'Solar Radiation (MJ/m2)', 'Rainfall(mm)', 
-#  'Snowfall (cm)', 'Seasons', 'Holiday', 'Functioning Day']
+df['Hour'] = df['Date'].dt.hour 
 
 # Transformar variables categóricas
 df['Seasons'] = df['Seasons'].astype('category')
 df['Holiday'] = df['Holiday'].astype('category')
 
-# Partición temporal solicitada: Apartar octubre y noviembre de 2018 como prueba
-# El dataset abarca desde 01/12/2017 hasta 30/11/2018. Octubre y noviembre de 2018 son los últimos 2 meses.
+
 test_mask = (df['Date'].dt.year == 2018) & (df['Date'].dt.month.isin([10, 11]))
 
 train_df = df[~test_mask].copy()
@@ -61,7 +51,7 @@ test_df = df[test_mask].copy()
 
 print(f"Tamaño entrenamiento: {len(train_df)} | Tamaño prueba: {len(test_df)}")
 
-# Definir características (X) y objetivo (y)
+
 features = [
     'Hour', 'Temperature(°C)', 'Humidity(%)', 'Wind speed (m/s)',
     'Visibility (10m)', 'Dew point temperature(°C)', 'Solar Radiation (MJ/m2)',
@@ -94,15 +84,13 @@ m1.fit(X_train, y_train)
 
 
 # M2: XGBoost con la pérdida analizada en el inciso (c) (Segunda derivada cero / constante)
-# Según la teoría del inciso (c), h_i = 0, lo que causa problemas de min_child_weight a menos que se regule.
 def custom_objective_c(preds, dtrain):
     labels = dtrain.get_label()
     residuals = labels - preds
-    # Gradiente para L(y, y_hat) asimétrico lineal por tramos: g_i = -alpha si r > 0, beta si r <= 0
-    # O bien expresado con la asimetría:
+    
     grad = np.where(residuals > 0, -alpha, beta)
-    # Segunda derivada teórica del inciso (c) es 0 (o cercana a 0)
-    hess = np.ones_like(preds) * 1e-5 # Ponemos un épsilon muy pequeño o 0 para probar la teoría
+   
+    hess = np.ones_like(preds) * 1e-5 # 
     return grad, hess
 
 print("Entrenando M2 (Objetivo C - h_i aprox 0)...")
@@ -147,7 +135,7 @@ m4.fit(X_train, y_train)
 
 
 # M5: Regresión lineal de cuantiles (QuantileRegressor de scikit-learn)
-# Requiere codificación one-hot para variables categóricas
+
 print("Entrenando M5 (QuantileRegressor sklearn)...")
 X_train_encoded = pd.get_dummies(X_train, drop_first=True)
 X_test_encoded = pd.get_dummies(X_test, drop_first=True)
@@ -183,8 +171,8 @@ for name, preds in models_dict.items():
     errors = y_test - preds
     pinball_loss = np.mean(np.maximum(alpha * errors, (alpha - 1) * errors))
     
-    # Cobertura: fracción de horas en que la demanda real quedó por debajo de lo predicho (y_test <= preds)
-    # Debe estar cerca de tau (ej. 0.75)
+   
+ 
     coverage = np.mean(y_test <= preds)
     
     evaluation_results.append({
@@ -198,13 +186,13 @@ eval_df = pd.DataFrame(evaluation_results)
 print("\n--- RESULTADOS DE EVALUACIÓN ---")
 print(eval_df.to_string(index=False))
 
-# Gráfica de cobertura por hora del día para M3 (Tu arreglo) y M4
+# Gráfica de cobertura por hora del día para M3  y M4
 test_df_eval = test_df.copy()
 test_df_eval['Pred_M3'] = preds_m3
 test_df_eval['Pred_M4'] = preds_m4
 test_df_eval['Under_M3'] = (test_df_eval[target] <= test_df_eval['Pred_M3']).astype(int)
 
-# Asegurar que se agrupe correctamente por las 24 horas y rellenar si falta alguna
+
 hourly_coverage = test_df_eval.groupby('Hour')['Under_M3'].mean().reindex(range(24), fill_value=0)
 
 plt.figure(figsize=(10, 5))
