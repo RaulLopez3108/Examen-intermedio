@@ -1,18 +1,14 @@
 # Examen-intermedio
-Nombre: Raul Leonardo Lopez Ruiz 
-Expediente: 218207462
-a = 2
-b = 6
+Nombre: Raul Leonardo Lopez Ruiz
+Expediente: 218207462 | a = 2, b = 6
 
 Examen intermedio/
-│
 ├── Problema 1/
-│   ├── codigo_p1.py      # Script principal del Problema 1
-│   └── README.md         # Documentación del Problema 1
-│
+│   ├── codigo_p1.py    # Script principal del Problema 1
+│   └── README.md       # Documentación del Problema 1
 └── Problema 2/
-    ├── codigo.py         # Script principal del Problema 2
-    └── README.md         # Documentación del Problema 2
+    ├── codigo.py       # Script principal del Problema 2
+    └── README.md       # Documentación del Problema 2
 
     
 ## Pasos para ejecutar el problema 1
