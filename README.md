@@ -19,8 +19,8 @@ cd "C:\Users\Usuario\Desktop\Examen intermedio\Problema 1"
     uv venv
      \.venv\Scripts\Activate.ps1
 ###### Instalar dependencias científicas para clustering y reducción de dimensionalidad
-uv pip install numpy pandas scikit-learn scipy matplotlib seaborn
-uv codigo.py
+    uv pip install numpy pandas scikit-learn scipy matplotlib seaborn
+    uv codigo.py
 
 
 
