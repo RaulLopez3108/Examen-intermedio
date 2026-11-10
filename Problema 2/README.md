@@ -46,4 +46,9 @@ Los modelos se evaluaron en el conjunto de prueba midiendo el **Costo Promedio (
 * **Explicación teórica si el arreglo no superó al nativo:**
   La aproximación M3 depende críticamente del hiperparámetro de escala $s$. Si $s$ es muy grande, $L_s$ se comporta como una pérdida cuadrática inclinada; si $s$ es muy chico, $h_i \approx 0$ en la mayoría de los puntos y se reactiva la inestabilidad de la división. El objetivo nativo (M4) utiliza estimaciones exactas o gradientes adaptativos
 
-  
+
+### Desiciones 
+Se eliminaron las horas en las que el sistema no funciono, incluir esas horas habría introducido ruido y patrones artificiales que los modelos como XGBoost o la regresión habrían intentado aprender erróneamente, distorsionando la predicción de la demanda real.
+
+Se implementó una partición cronológica estricta para evitar cualquier tipo de fuga de datos del futuro hacia el pasado.
+Al tratarse de una serie temporal de demanda de bicicletas, un esquema de validación cruzada tradicional (K-Fold aleatorio) mezclaría datos futuros con pasados, lo cual es incorrecto en la predicción temporal.
