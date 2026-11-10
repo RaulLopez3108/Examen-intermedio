@@ -44,6 +44,6 @@ Los modelos se evaluaron en el conjunto de prueba midiendo el **Costo Promedio (
 * **¿El modelo de menor costo es también el de mejor cobertura?**
   Sí, existe una correlación directa entre la minimización de la pérdida Pinball y el cumplimiento de la cobertura deseada ($\tau = 0.8$). M1 (MSE) falla severamente en la cobertura (alrededor del 50%), ya que no penaliza de forma asimétrica la falta de stock/disponibilidad de bicicletas.
 * **Explicación teórica si el arreglo no superó al nativo:**
-  La aproximación M3 depende críticamente del hiperparámetro de escala $s$. Si $s$ es muy grande, $L_s$ se comporta como una pérdida cuadrática inclinada; si $s$ es muy chico, $h_i \approx 0$ en la mayoría de los puntos y se reactiva la inestabilidad de la división. El objetivo nativo (M4) utiliza estimaciones exactas o gradientes adaptativos optimizados internamente en C++.
+  La aproximación M3 depende críticamente del hiperparámetro de escala $s$. Si $s$ es muy grande, $L_s$ se comporta como una pérdida cuadrática inclinada; si $s$ es muy chico, $h_i \approx 0$ en la mayoría de los puntos y se reactiva la inestabilidad de la división. El objetivo nativo (M4) utiliza estimaciones exactas o gradientes adaptativos
 
   
