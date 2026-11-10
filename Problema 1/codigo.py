@@ -133,7 +133,7 @@ print("\n--- EJECUTANDO INCISO (B): La trampa visual (t-SNE) ---")
 
 d_b = 10
 n_b = 300
-np.random.seed(42)
+np.random.seed(218207462)
 X_normal_10d = np.random.normal(loc=0.0, scale=1.0, size=(n_b, d_b))
 perplejidades = [5, 30, 50]
 
